@@ -25,7 +25,7 @@ public class GoroxScript : MonoBehaviour
         rb2D.velocity *= new Vector2(resist, resist);
         var position = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0);
         var rotation = Mathf.Atan(position.y / position.x)* 180 / Mathf.PI +90;
-        if (position.x>0)
+        if (position.x>=0)
             rotation-=180;
         transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
