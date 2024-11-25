@@ -7,8 +7,8 @@ using UnityEngine;
 public class GoroxScript : MonoBehaviour
 {
     public Rigidbody2D rb2D;
-    private const float speed = 10f;
-    private const float resist = 0.98f;
+    private float speed = 10f;
+    private float resist = 0.98f;
 
     void Start()
     {
