@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 107732629}
   - component: {fileID: 107732630}
   m_Layer: 0
-  m_Name: Background 1 1 (1)
+  m_Name: Background 2 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,7 +679,7 @@ GameObject:
   - component: {fileID: 1368183474}
   - component: {fileID: 1368183475}
   m_Layer: 0
-  m_Name: Background 1 2 (1)
+  m_Name: Background 2 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -869,7 +869,7 @@ GameObject:
   - component: {fileID: 1754510234}
   - component: {fileID: 1754510235}
   m_Layer: 0
-  m_Name: Background 1 0 (1)
+  m_Name: Background 2 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1163,6 +1163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29d5323c217ef24fa194b3698c0413d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 77825873}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
