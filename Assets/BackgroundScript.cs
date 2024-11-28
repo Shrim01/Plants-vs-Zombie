@@ -24,19 +24,19 @@ public class BackgroundScript : MonoBehaviour
             if (Mathf.Abs(player.transform.position.x - position[i, j].x) < 0.2f &&
                 Mathf.Abs(player.transform.position.y - position[i, j].y) < 0.2f)
             {
-                transform.position = new Vector3(position[i, j].x, position[i, j].y, 0);
+                transform.position = new Vector3(position[i, j].x, position[i, j].y, 10);
                 NewPosition(position, i, j, 1);
             }
 
             else if (Mathf.Abs(player.transform.position.x - position[i, j].x) < 0.2f)
             {
-                transform.position = new Vector3(position[i, j].x, transform.position.y, 0);
+                transform.position = new Vector3(position[i, j].x, transform.position.y, 10);
                 NewPosition(position, -1, j, 2);
             }
 
             else if (Mathf.Abs(player.transform.position.y - position[i, j].y) < 0.2f)
             {
-                transform.position = new Vector3(transform.position.x, position[i, j].y, 0);
+                transform.position = new Vector3(transform.position.x, position[i, j].y, 10);
                 NewPosition(position, i, -1, 2);
             }
         }
