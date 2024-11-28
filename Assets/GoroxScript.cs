@@ -42,7 +42,4 @@ public class GoroxScript : MonoBehaviour
             rotation += 180;
         transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
-
-
-
 }
