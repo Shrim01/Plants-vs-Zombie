@@ -222,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb2D: {fileID: 77825878}
   bullet: {fileID: 6779933801951442537, guid: 80d7af4c768b89b48bd82702d787c809, type: 3}
+  Reload: 0.05
 --- !u!50 &77825878
 Rigidbody2D:
   serializedVersion: 4
@@ -383,7 +384,7 @@ Transform:
   m_GameObject: {fileID: 2084350481}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
