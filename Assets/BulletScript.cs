@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootScript : MonoBehaviour
+public class BulletScript : MonoBehaviour
 {
-    public GameObject bulllet;
+    // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
-
+    // Update is called once per frame
     void Update()
     {
         
