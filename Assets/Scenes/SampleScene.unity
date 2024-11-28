@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2D: {fileID: 77825878}
+  bullet: {fileID: 6779933801951442537, guid: 80d7af4c768b89b48bd82702d787c809, type: 3}
 --- !u!50 &77825878
 Rigidbody2D:
   serializedVersion: 4

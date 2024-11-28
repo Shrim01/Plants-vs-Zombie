@@ -7,13 +7,12 @@ using UnityEngine;
 public class GoroxScript : MonoBehaviour
 {
     public Rigidbody2D rb2D;
+    public GameObject bullet;
     private float speed = 10f;
     private float resist = 0.98f;
-    private GameObject bullet;
 
     void Start()
     {
-
     }
 
     void Update()
@@ -39,15 +38,16 @@ public class GoroxScript : MonoBehaviour
     private void Rotate()
     {
         var position = Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        var rotation = Mathf.Atan(position.y / position.x)* 180 / Mathf.PI +90;
-        if (position.x>=0)
-            rotation-=180;
+        var rotation = Mathf.Atan(position.y / position.x) * 180 / Mathf.PI + 90;
+        if (position.x >= 0)
+            rotation -= 180;
         transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
 
 
     private void Shoot()
     {
-        
+        if (Input.GetMouseButton(0))
+            Instantiate(bullet, transform.position, transform.rotation);
     }
 }
