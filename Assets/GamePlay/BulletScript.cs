@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection.Emit;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
@@ -10,7 +5,14 @@ public class BulletScript : MonoBehaviour
     public Rigidbody2D rb2D;
     public int speed = 100;
     public float liveTime = 5;
+    public int damege;
     private float time;
+
+    private void Start()
+    {
+        damege = 10;
+        gameObject.tag = "Bullet";
+    }
 
     void Update()
     {
@@ -23,7 +25,6 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.name == "GameObject")
-            Destroy(gameObject);
+
     }
 }

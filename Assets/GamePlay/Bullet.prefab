@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3210069355672166599}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Undefined
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,3 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb2D: {fileID: 6903373412203824588}
   speed: 20
+  liveTime: 5
