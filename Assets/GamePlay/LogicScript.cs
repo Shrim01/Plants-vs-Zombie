@@ -1,15 +1,34 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LogicScript : MonoBehaviour
 {
-    public int score;
+    public int scorePlayer;
+    public int scoreNextlevel=20;
+    private int level = 1;
+    public Sprite firstSprite;
+    public Sprite secondSprite;
+    public Sprite thirdSprite;
+    public Sprite[] sprites;
+    private GoroxScript player;
 
-    // Start is called before the first frame update
     void Start()
     {
-        score = 0;
+        sprites = new[] { firstSprite, secondSprite, thirdSprite };
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<GoroxScript>();
+        scorePlayer = 0;
     }
 
-    
+    public void AddScore(int score)
+    {
+        scorePlayer += score;
+        if (scorePlayer >= scoreNextlevel)
+        {
+            player.Upgrade(sprites[level++]);
+            scoreNextlevel*=3;
+        }
+        Debug.Log(scorePlayer);
+        Debug.Log(scoreNextlevel);
+    }
 }

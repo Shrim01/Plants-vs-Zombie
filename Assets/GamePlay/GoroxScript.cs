@@ -10,11 +10,6 @@ public class GoroxScript : MonoBehaviour
     private float speed = 10f;
     private float resist = 0.98f;
 
-
-    void Start()
-    {
-    }
-
     void Update()
     {
         Move();
@@ -41,5 +36,10 @@ public class GoroxScript : MonoBehaviour
         if (position.x < 0)
             rotation += 180;
         transform.rotation = Quaternion.Euler(0, 0, rotation);
+    }
+
+    public void Upgrade(Sprite sprite)
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite=sprite;
     }
 }

@@ -183,7 +183,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6c66220017f55914bb3c757201dc2f7c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55a488a2b5e9f20439a223ff38eb1ecf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -469,7 +469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5948d181d32d64f49acd55be38577d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
+  scorePlayer: 0
+  scoreNextlevel: 20
+  firstSprite: {fileID: 21300000, guid: 55a488a2b5e9f20439a223ff38eb1ecf, type: 3}
+  secondSprite: {fileID: 21300000, guid: 6c66220017f55914bb3c757201dc2f7c, type: 3}
+  thirdSprite: {fileID: 21300000, guid: 38c0d8f85318ea34694b243c054fb322, type: 3}
+  sprites: []
 --- !u!4 &1568731249
 Transform:
   m_ObjectHideFlags: 0

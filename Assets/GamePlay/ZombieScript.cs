@@ -6,9 +6,11 @@ public class ZombieScripts : MonoBehaviour
     private int MaxHealthPoint = 20;
     private int CurrentHealthPoint;
     private readonly int x = 12;
+    private LogicScript logic;
 
     void Start()
     {
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         CurrentHealthPoint = MaxHealthPoint;
         gameObject.tag = "Zombie";
         player = GameObject.FindGameObjectWithTag("Player");
@@ -31,7 +33,10 @@ public class ZombieScripts : MonoBehaviour
         if (damage < CurrentHealthPoint)
             CurrentHealthPoint -= damage;
         else
+        {
             Destroy(gameObject);
+            logic.AddScore(10);
+        }
         Destroy(bullet);
     }
 }
