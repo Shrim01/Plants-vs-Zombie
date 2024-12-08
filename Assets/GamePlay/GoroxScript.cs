@@ -52,7 +52,6 @@ public class GoroxScript : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        Debug.Log(CurrentHealthPoint);
         if (other.gameObject.tag == "Zombie")
             CurrentHealthPoint -= 10;
         if (CurrentHealthPoint < 0)
