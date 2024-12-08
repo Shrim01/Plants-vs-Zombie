@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,15 +16,18 @@ public class LogicScript : MonoBehaviour
     private GoroxScript player;
     private TreeNode<Sprite> binaryTree;
     public GameObject choice;
+    public GameObject gameOver;
 
     void Start()
     {
         sprites = new[] { firstSprite, secondSprite, thirdSprite };
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<GoroxScript>();
         scorePlayer = 0;
-        binaryTree = new TreeNode<Sprite>(firstSprite);
-        binaryTree.Left = new TreeNode<Sprite>(secondSprite);
-        binaryTree.Right = new TreeNode<Sprite>(thirdSprite);
+        binaryTree = new TreeNode<Sprite>(firstSprite)
+        {
+            Left = new TreeNode<Sprite>(secondSprite),
+            Right = new TreeNode<Sprite>(thirdSprite)
+        };
     }
 
     public void AddScore(int score)
@@ -49,6 +53,16 @@ public class LogicScript : MonoBehaviour
             binaryTree=binaryTree.Right;
         player.Upgrade(binaryTree.Value);
         choice.SetActive(false);
+    }
+
+    public void GameOver()
+    {
+        gameOver.SetActive(true);
+    }
+
+    public void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
 public class TreeNode<T>

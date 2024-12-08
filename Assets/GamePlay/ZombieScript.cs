@@ -27,15 +27,19 @@ public class ZombieScripts : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        var bullet = other.gameObject;
-        var damage = bullet.GetComponent<BulletScript>().damege;
-        if (damage < CurrentHealthPoint)
-            CurrentHealthPoint -= damage;
-        else
+        if (other.gameObject.tag == "Bullet")
         {
-            Destroy(gameObject);
-            logic.AddScore(10);
+            var bullet = other.gameObject;
+            var damage = bullet.GetComponent<BulletScript>().damage;
+            if (damage < CurrentHealthPoint)
+                CurrentHealthPoint -= damage;
+            else
+            {
+                Destroy(gameObject);
+                logic.AddScore(10);
+            }
+
+            Destroy(bullet);
         }
-        Destroy(bullet);
     }
 }

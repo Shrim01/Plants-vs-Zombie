@@ -1,16 +1,17 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BulletScript : MonoBehaviour
 {
     public Rigidbody2D rb2D;
     public int speed = 100;
     public float liveTime = 5;
-    public int damege;
+    [FormerlySerializedAs("damege")] public int damage;
     private float time;
 
     private void Start()
     {
-        damege = 10;
+        damage = 10;
         gameObject.tag = "Bullet";
     }
 
