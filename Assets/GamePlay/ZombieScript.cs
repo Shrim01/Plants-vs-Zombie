@@ -3,10 +3,11 @@ using UnityEngine;
 public class ZombieScripts : MonoBehaviour
 {
     public GameObject player;
+    public readonly int damage = 10;
     private int MaxHealthPoint = 20;
     private int CurrentHealthPoint;
     private readonly int x = 12;
-    private LogicScript logic;
+    public LogicScript logic;
 
     void Start()
     {
@@ -20,9 +21,7 @@ public class ZombieScripts : MonoBehaviour
     {
         var position = player.transform.position - transform.position;
         if (Mathf.Sqrt(position.x * position.x + position.y * position.y) > x * 3)
-        {
             Destroy(gameObject);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -38,7 +37,6 @@ public class ZombieScripts : MonoBehaviour
                 Destroy(gameObject);
                 logic.AddScore(10);
             }
-
             Destroy(bullet);
         }
     }

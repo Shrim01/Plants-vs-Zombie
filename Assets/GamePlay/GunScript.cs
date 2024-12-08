@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class GunScript : MonoBehaviour
@@ -8,11 +5,6 @@ public class GunScript : MonoBehaviour
     public GameObject bullet;
     public float Reload;
     private float timer;
-
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {

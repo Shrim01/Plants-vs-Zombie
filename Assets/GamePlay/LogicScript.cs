@@ -8,25 +8,28 @@ public class LogicScript : MonoBehaviour
 {
     public int scorePlayer;
     public int scoreNextlevel=20;
-    private int level = 1;
-    public Sprite firstSprite;
-    public Sprite secondSprite;
-    public Sprite thirdSprite;
-    public Sprite[] sprites;
-    private GoroxScript player;
-    private TreeNode<Sprite> binaryTree;
     public GameObject choice;
     public GameObject gameOver;
+    public Sprite[] Sprites;
+    private GoroxScript player;
+    private TreeNode<Sprite> binaryTree;
 
     void Start()
     {
-        sprites = new[] { firstSprite, secondSprite, thirdSprite };
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<GoroxScript>();
         scorePlayer = 0;
-        binaryTree = new TreeNode<Sprite>(firstSprite)
+        binaryTree = new TreeNode<Sprite>(Sprites[0])
         {
-            Left = new TreeNode<Sprite>(secondSprite),
-            Right = new TreeNode<Sprite>(thirdSprite)
+            Left = new TreeNode<Sprite>(Sprites[1])
+            {
+                Left = new TreeNode<Sprite>(Sprites[3]),
+                Right = new TreeNode<Sprite>(Sprites[4])
+            },
+            Right = new TreeNode<Sprite>(Sprites[2])
+            {
+                Left = new TreeNode<Sprite>(Sprites[5]),
+                Right = new TreeNode<Sprite>(Sprites[6])
+            }
         };
     }
 
@@ -38,8 +41,6 @@ public class LogicScript : MonoBehaviour
             ShowChoice();
             scoreNextlevel*=3;
         }
-        Debug.Log(scorePlayer);
-        Debug.Log(scoreNextlevel);
     }
     private void ShowChoice()
     {
@@ -68,6 +69,8 @@ public class LogicScript : MonoBehaviour
 public class TreeNode<T>
 {
     public T Value { get; set; }
+    private int damage;
+    private int reload;
     public TreeNode<T> Left { get; set; }
     public TreeNode<T> Right { get; set; }
 

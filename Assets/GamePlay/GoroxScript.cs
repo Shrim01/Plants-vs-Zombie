@@ -7,10 +7,12 @@ using UnityEngine;
 public class GoroxScript : MonoBehaviour
 {
     public Rigidbody2D rb2D;
+    public int damageBullet = 10;
+    public int speedBullet = 100;
     private readonly float speed = 10f;
     private readonly float resist = 0.98f;
-    private int MaxHealthPoint = 100;
-    private int CurrentHealthPoint;
+    private float MaxHealthPoint = 100;
+    private float CurrentHealthPoint;
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class GoroxScript : MonoBehaviour
             rb2D.AddForce(new Vector2(horizontal * speed, 0));
         if (vertical != 0)
             rb2D.AddForce(new Vector2(0, vertical * speed));
-        rb2D.velocity *= new Vector2(resist, resist);
+        rb2D.velocity *= resist;
     }
 
 
@@ -53,8 +55,8 @@ public class GoroxScript : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.tag == "Zombie")
-            CurrentHealthPoint -= 10;
-        if (CurrentHealthPoint < 0)
+            CurrentHealthPoint -= other.gameObject.GetComponent<ZombieScripts>().damage * Time.deltaTime;
+        if (CurrentHealthPoint <= 0)
         {
             gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().GameOver();
