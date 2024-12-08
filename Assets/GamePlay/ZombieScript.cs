@@ -16,7 +16,6 @@ public class ZombieScripts : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
         var position = player.transform.position - transform.position;
