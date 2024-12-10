@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d88a756c6b611246959ee8312edaea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 995186764}
   zombie: {fileID: 3648859421222575058, guid: 32854aeebf3a0374f9bf9d8dab42e7fd, type: 3}
   plants: {fileID: 3586807358001630141, guid: b5ac7dd7062eefa4ba26187e37a608a0, type: 3}
   CountZombieOnMap: 15
@@ -1155,7 +1155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62507dcb12a6efa408d4c798d6d4417b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 995186764}
 --- !u!1 &1568731247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,11 +1190,13 @@ MonoBehaviour:
   choice: {fileID: 94424653}
   gameOver: {fileID: 482310219}
   Sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 55a488a2b5e9f20439a223ff38eb1ecf, type: 3}
+  - {fileID: 21300000, guid: 6c66220017f55914bb3c757201dc2f7c, type: 3}
+  - {fileID: 21300000, guid: 38c0d8f85318ea34694b243c054fb322, type: 3}
+  - {fileID: 21300000, guid: 6c66220017f55914bb3c757201dc2f7c, type: 3}
+  - {fileID: 21300000, guid: 38c0d8f85318ea34694b243c054fb322, type: 3}
+  - {fileID: 21300000, guid: 6c66220017f55914bb3c757201dc2f7c, type: 3}
+  - {fileID: 21300000, guid: 38c0d8f85318ea34694b243c054fb322, type: 3}
 --- !u!4 &1568731249
 Transform:
   m_ObjectHideFlags: 0
@@ -1351,9 +1353,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2084350482}
-  - component: {fileID: 2084350483}
   - component: {fileID: 2084350484}
-  - component: {fileID: 2084350485}
+  - component: {fileID: 2084350483}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -1388,7 +1389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29d5323c217ef24fa194b3698c0413d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 995186764}
 --- !u!212 &2084350484
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1441,19 +1442,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2084350485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084350481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b29d5323c217ef24fa194b3698c0413d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

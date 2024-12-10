@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BinaryTree;
 
 public class LogicScript : MonoBehaviour
 {
@@ -64,20 +65,5 @@ public class LogicScript : MonoBehaviour
     public void Reset()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-}
-public class TreeNode<T>
-{
-    public T Value { get; set; }
-    private int damage;
-    private int reload;
-    public TreeNode<T> Left { get; set; }
-    public TreeNode<T> Right { get; set; }
-
-    public TreeNode(T value)
-    {
-        Value = value;
-        Left = null;
-        Right = null;
     }
 }
