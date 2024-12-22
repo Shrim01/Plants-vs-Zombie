@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using BinaryTree;
 
 public class LogicScript : MonoBehaviour
 {
@@ -12,26 +11,12 @@ public class LogicScript : MonoBehaviour
     public GameObject choice;
     public GameObject gameOver;
     public Sprite[] Sprites;
-    private GoroxScript player;
-    private TreeNode<Sprite> binaryTree;
+    private
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<GoroxScript>();
         scorePlayer = 0;
-        binaryTree = new TreeNode<Sprite>(Sprites[0])
-        {
-            Left = new TreeNode<Sprite>(Sprites[1])
-            {
-                Left = new TreeNode<Sprite>(Sprites[3]),
-                Right = new TreeNode<Sprite>(Sprites[4])
-            },
-            Right = new TreeNode<Sprite>(Sprites[2])
-            {
-                Left = new TreeNode<Sprite>(Sprites[5]),
-                Right = new TreeNode<Sprite>(Sprites[6])
-            }
-        };
+
     }
 
     public void AddScore(int score)
@@ -50,10 +35,7 @@ public class LogicScript : MonoBehaviour
     public void DoChoice(int num)
     {
         if(num==0)
-            binaryTree=binaryTree.Left;
         if(num==1)
-            binaryTree=binaryTree.Right;
-        player.Upgrade(binaryTree.Value);
         choice.SetActive(false);
     }
 

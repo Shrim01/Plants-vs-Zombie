@@ -1,21 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
-namespace BinaryTree
+namespace Tree
 {
-    public class TreeNode<T>
+    public class Node
     {
-        public T Value { get; set; }
-        public int Damage { get; set; }
-        public int Reload { get; set; }
-        public TreeNode<T> Left { get; set; }
-        public TreeNode<T> Right { get; set; }
-
-        public TreeNode(T value)
-        {
-            Value = value;
-            Left = null;
-            Right = null;
-
-        }
+        
     }
 }

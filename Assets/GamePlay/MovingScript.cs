@@ -1,30 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
-public class GoroxScript : MonoBehaviour
+public class MovingScript : MonoBehaviour
 {
     public Rigidbody2D rb2D;
-    public int damageBullet = 10;
-    public int speedBullet = 100;
-    private readonly float speed = 10f;
+    public float speed = 10f;
     private readonly float resist = 0.98f;
-    private float MaxHealthPoint = 100;
-    private float CurrentHealthPoint;
-
-    void Start()
-    {
-        CurrentHealthPoint = MaxHealthPoint;
-    }
 
     void Update()
     {
         Move();
         Rotate();
     }
-
 
     private void Move()
     {
@@ -45,21 +35,5 @@ public class GoroxScript : MonoBehaviour
         if (position.x < 0)
             rotation += 180;
         transform.rotation = Quaternion.Euler(0, 0, rotation);
-    }
-
-    public void Upgrade(Sprite sprite)
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
-    }
-
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Zombie")
-            CurrentHealthPoint -= other.gameObject.GetComponent<ZombieScripts>().damage * Time.deltaTime;
-        if (CurrentHealthPoint <= 0)
-        {
-            gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().GameOver();
-        }
     }
 }
