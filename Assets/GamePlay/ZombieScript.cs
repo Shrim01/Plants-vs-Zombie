@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 
 public class ZombieScripts : MonoBehaviour
 {
     public GameObject player;
     public readonly int damage = 10;
-    private int MaxHealthPoint = 20;
+    private int MaxHealthPoint = 100;
     private int CurrentHealthPoint;
     private readonly int x = 12;
     public LogicScript logic;
@@ -29,15 +30,14 @@ public class ZombieScripts : MonoBehaviour
         if (other.gameObject.tag == "Bullet")
         {
             var bullet = other.gameObject;
-            var damage = bullet.GetComponent<BulletScript>().damage;
-            if (damage < CurrentHealthPoint)
-                CurrentHealthPoint -= damage;
+            var damageBullet = bullet.GetComponent<BulletScript>().damage;
+            if (damageBullet < CurrentHealthPoint)
+                CurrentHealthPoint -= damageBullet;
             else
             {
                 Destroy(gameObject);
                 logic.AddScore(10);
             }
-            Destroy(bullet);
         }
     }
 }

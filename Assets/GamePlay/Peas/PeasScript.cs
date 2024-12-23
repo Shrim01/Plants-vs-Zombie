@@ -3,10 +3,10 @@ using UnityEngine;
 public class PeasScript : MonoBehaviour
 {
 
-    public int damageBullet = 10;
-    public int speedBullet = 100;
     public float reload;
     public GameObject bullet;
+    public int damageBullet;
+    public int speedBullet;
     private float MaxHealthPoint = 100;
     private float CurrentHealthPoint;
     private float timer;
@@ -26,7 +26,7 @@ public class PeasScript : MonoBehaviour
         timer += Time.deltaTime;
         if (Input.GetMouseButton(0) && timer > reload)
         {
-            Instantiate(bullet, transform.position, gameObject.GetComponentInParent<Transform>().rotation);
+            Instantiate(bullet, transform.position, transform.rotation);
             timer = 0;
         }
     }
@@ -40,8 +40,5 @@ public class PeasScript : MonoBehaviour
             gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().GameOver();
         }
-        Debug.Log(CurrentHealthPoint);
     }
-
-    
 }
