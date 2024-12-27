@@ -321,10 +321,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0c1c812561c4a4ea3021f1be3eeec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageBullet: 10
-  speedBullet: 100
   reload: 0.1
   bullet: {fileID: 6779933801951442537, guid: 80d7af4c768b89b48bd82702d787c809, type: 3}
+  damageBullet: 10
+  speedBullet: 20
 --- !u!114 &290973020
 MonoBehaviour:
   m_ObjectHideFlags: 0
