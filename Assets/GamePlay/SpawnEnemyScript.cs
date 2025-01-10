@@ -13,10 +13,10 @@ public class SpawnEnemyScript : MonoBehaviour
     public GameObject zombie;
     public GameObject plants;
     public int CountZombieOnMap = 15;
-    public int CountPlantsOnMap;
-    private Dictionary<string, int> countEnemy = new() { { "Zombie", 0 }, { "Plants", 0 } };
-    private int x = 12;
-    private int y = 6;
+    public int CountPlantsOnMap = 15;
+    private readonly Dictionary<string, int> countEnemy = new() { { "Zombie", 0 }, { "Plants", 0 } };
+    private int x = 30;
+    private int y = 16;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class SpawnEnemyScript : MonoBehaviour
 
     private void SpawnZombie()
     {
-        if (countEnemy["Zombie"]++ < CountZombieOnMap)
+        if (countEnemy["Zombie"] < CountZombieOnMap)
             Instantiate(zombie, GetPosition(), transform.rotation);
         countEnemy["Zombie"] = GameObject.FindGameObjectsWithTag("Zombie").Length;
     }

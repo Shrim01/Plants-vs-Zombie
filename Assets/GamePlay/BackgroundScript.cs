@@ -3,9 +3,10 @@ using UnityEngine;
 public class BackgroundScript : MonoBehaviour
 {
     public GameObject player;
-    private float positionX = 25.6f / 4;
-    private float positionY = 15.3625f / 4;
+    private float positionX = 11.52f;
+    private float positionY = 11.52f;
     private Vector2[,] position;
+    private const float fault = 0.4f;
 
     void Start()
     {
@@ -21,20 +22,20 @@ public class BackgroundScript : MonoBehaviour
         for (int i = 0; i < 2; i++)
         for (int j = 0; j < 2; j++)
         {
-            if (Mathf.Abs(player.transform.position.x - position[i, j].x) < 0.2f &&
-                Mathf.Abs(player.transform.position.y - position[i, j].y) < 0.2f)
+            if (Mathf.Abs(player.transform.position.x - position[i, j].x) < fault &&
+                Mathf.Abs(player.transform.position.y - position[i, j].y) < fault)
             {
                 transform.position = new Vector3(position[i, j].x, position[i, j].y, 10);
                 NewPosition(position, i, j, 1);
             }
 
-            else if (Mathf.Abs(player.transform.position.x - position[i, j].x) < 0.2f)
+            else if (Mathf.Abs(player.transform.position.x - position[i, j].x) < fault)
             {
                 transform.position = new Vector3(position[i, j].x, transform.position.y, 10);
                 NewPosition(position, -1, j, 2);
             }
 
-            else if (Mathf.Abs(player.transform.position.y - position[i, j].y) < 0.2f)
+            else if (Mathf.Abs(player.transform.position.y - position[i, j].y) < fault)
             {
                 transform.position = new Vector3(transform.position.x, position[i, j].y, 10);
                 NewPosition(position, i, -1, 2);
