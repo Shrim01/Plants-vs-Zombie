@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Zombie
+  - Bullet
+  - Logic
+  - Choice
   layers:
   - Default
   - TransparentFX
