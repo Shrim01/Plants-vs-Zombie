@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PeasScript : MonoBehaviour
+public class StarScript : MonoBehaviour
 {
 
     public float reload;
