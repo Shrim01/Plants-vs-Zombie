@@ -554,10 +554,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reload: 0.5
   bullet: {fileID: 6779933801951442537, guid: 80d7af4c768b89b48bd82702d787c809, type: 3}
-  damageBullet: 10
+  damageBullet: 30
   speedBullet: 60
   countBullet: 0
   speed: 30
+  boom: 0
 --- !u!114 &77825881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4606,10 +4607,15 @@ MonoBehaviour:
   scorePlayer: 0
   scoreNextlevel: 20
   choice: {fileID: 94424653}
-  gameOver: {fileID: 0}
+  gameOver: {fileID: 482310219}
   SpritesPeas:
   - {fileID: 21300000, guid: f8caf6879c4488e4f98cf15dd2260048, type: 3}
-  BulletPeas: []
+  - {fileID: 21300000, guid: 349f173d40c1a7141ad13a9a382aed9c, type: 3}
+  - {fileID: 21300000, guid: 1a206b0d9315b78408c0d3ef4c7814e9, type: 3}
+  - {fileID: 21300000, guid: 373a8a6ad0c06d74a824d8dc36f24faa, type: 3}
+  BulletPeas:
+  - {fileID: 21300000, guid: 09dbaa8998471bc47866b97d5da4a8a9, type: 3}
+  - {fileID: 21300000, guid: 47101ba874f3cb94098c18b666a1ba2f, type: 3}
   SpritesChomper: []
   BulletChomper: []
 --- !u!1 &1589837878

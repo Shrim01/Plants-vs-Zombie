@@ -40,6 +40,6 @@ public class SpawnEnemyScript : MonoBehaviour
         var rotation = Random.rotation.eulerAngles.z;
         return player.transform.position + new Vector3(
             Mathf.Cos(rotation * Mathf.PI / 180) * radius,
-            Mathf.Sin(rotation * Mathf.PI / 180) * radius, 0);
+            Mathf.Sin(rotation * Mathf.PI / 180) * radius, 5);
     }
 }

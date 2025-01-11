@@ -15,14 +15,18 @@ namespace Classes
         public Sprite evolution;
         public int countBullet;
         public ParametersPeas[] nextEvolution;
+        public bool boom;
 
-        public ParametersPeas(float reload, Sprite bullet, int damageBullet, int speedBullet,
-            int speed, float MaxHealth, Sprite evolution, int countBullet, ParametersPeas[] NextEvo)
+        public ParametersPeas(float reload, Sprite bullet,
+            int damageBullet, int speedBullet,
+            int speed, float MaxHealth, bool boom, Sprite evolution,
+            int countBullet, ParametersPeas[] NextEvo)
         {
             this.reload = reload;
             this.bullet = bullet;
             this.damageBullet = damageBullet;
             this.speedBullet = speedBullet;
+            this.boom = boom;
             this.speed = speed;
             Health = MaxHealth;
             this.evolution = evolution;

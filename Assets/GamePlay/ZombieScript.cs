@@ -1,19 +1,39 @@
-using System;
 using UnityEngine;
 
 public class ZombieScripts : MonoBehaviour
 {
     public GameObject player;
     public readonly int damage = 10;
+    public LogicScript logic;
+    public Sprite[] sprites;
     private int MaxHealthPoint = 100;
     private int CurrentHealthPoint;
     private readonly int x = 30;
-    public LogicScript logic;
+    private int addScore;
 
     void Start()
     {
+        var rnd = Random.Range(0, 10);
+        if (rnd <= 4)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprites[0];
+            CurrentHealthPoint = MaxHealthPoint;
+            addScore = 10;
+        }
+        else if (rnd >= 8)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprites[2];
+            CurrentHealthPoint = MaxHealthPoint * 2;
+            addScore = 20;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprites[1];
+            CurrentHealthPoint = MaxHealthPoint / 10 * 15;
+            addScore = 15;
+        }
+
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-        CurrentHealthPoint = MaxHealthPoint;
         gameObject.tag = "Zombie";
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -36,7 +56,7 @@ public class ZombieScripts : MonoBehaviour
             else
             {
                 Destroy(gameObject);
-                logic.AddScore(100);
+                logic.AddScore(addScore);
             }
         }
     }

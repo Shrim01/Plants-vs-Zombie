@@ -1,7 +1,6 @@
 using UnityEngine;
 using Classes;
 using GamePlay;
-using UnityEngine.U2D.IK;
 
 public class PeasScript : MonoBehaviour
 {
@@ -11,7 +10,8 @@ public class PeasScript : MonoBehaviour
     public int speedBullet;
     public int countBullet = 1;
     public int speed;
-    private float MaxHealthPoint = 100;
+    public bool boom;
+    private float MaxHealthPoint = 200;
     private float CurrentHealthPoint;
     private float timer;
     private bool DoShoot;
@@ -50,12 +50,11 @@ public class PeasScript : MonoBehaviour
             if (timer > reload / 4)
             {
                 Instantiate(bullet, transform.position, transform.rotation);
-                if (DidShoot++ >= countBullet)
+                if (++DidShoot >= countBullet)
                 {
                     DidShoot = 0;
                     DoShoot = !DoShoot;
                 }
-
                 timer = 0;
             }
         }
@@ -74,7 +73,7 @@ public class PeasScript : MonoBehaviour
 
     public void NextChoice(int num)
     {
-        if (NextEvolution == null || num >= NextEvolution.Length);
+        if (NextEvolution == null || num >= NextEvolution.Length) ;
         else
         {
             reload = NextEvolution[num].reload;
@@ -92,16 +91,32 @@ public class PeasScript : MonoBehaviour
             if (NextEvolution[num].nextEvolution != null)
                 NextEvolution = NextEvolution[num].nextEvolution;
         }
+
         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
     }
 
     private ParametersPeas[] CreateParameters()
     {
+        var fin = new ParametersPeas(0.25f,
+            GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().BulletPeas[1],
+            120, 80, 45, 400.0f, true,
+            GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().SpritesPeas[3],
+            4, null);
         return new[]
         {
-            new ParametersPeas(0.1f, null, 1000, 100, 1000, 100.0f,
+            new ParametersPeas(0.4f, null, 45, 80, 45, 250.0f, false,
                 GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().SpritesPeas[0],
-                10, null)
+                2, new[]
+                {
+                    new ParametersPeas(0.3f, null, 90, 80, 45, 300.0f, false,
+                        GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().SpritesPeas[1],
+                        4, new[] { fin }),
+                    new ParametersPeas(0.3f,
+                        GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().BulletPeas[1],
+                        60, 80, 45, 250.0f, true,
+                        GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().SpritesPeas[2],
+                        1, new[] { fin })
+                })
         };
     }
 }
