@@ -33,5 +33,30 @@ namespace Classes
 
     public class ParametersChomper
     {
+        public float reload;
+        public float range;
+        public Sprite bullet;
+        public int damageBullet;
+        public int speedBullet;
+        public int speed;
+        public float Health;
+        public Sprite evolution;
+        public int countBullet;
+        public ParametersChomper[] nextEvolution;
+
+        public ParametersChomper(float reload, float range, Sprite bullet, int damageBullet, int speedBullet,
+            int speed, float MaxHealth, Sprite evolution, int countBullet, ParametersChomper[] NextEvo)
+        {
+            this.reload = reload;
+            this.range = range;
+            this.bullet = bullet;
+            this.damageBullet = damageBullet;
+            this.speedBullet = speedBullet;
+            this.speed = speed;
+            Health = MaxHealth;
+            this.evolution = evolution;
+            this.countBullet = countBullet;
+            nextEvolution = NextEvo;
+        }
     }
 }
