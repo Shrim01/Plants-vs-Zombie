@@ -1,7 +1,6 @@
 using UnityEngine;
 using Classes;
 using GamePlay;
-using UnityEngine.U2D.IK;
 
 public class PeasScript : MonoBehaviour
 {
