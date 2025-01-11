@@ -1,11 +1,11 @@
 using UnityEngine;
 using Classes;
 using GamePlay;
-using UnityEngine.U2D.IK;
 
-public class PeasScript : MonoBehaviour
+public class ChomperScript : MonoBehaviour
 {
     public float reload;
+    public float range;
     public GameObject bullet;
     public int damageBullet;
     public int speedBullet;
@@ -16,49 +16,24 @@ public class PeasScript : MonoBehaviour
     private float timer;
     private bool DoShoot;
     private int DidShoot;
-    public ParametersPeas[] NextEvolution;
+    public ParametersChomper[] NextEvolution;
 
     void Start()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<MovingScript>().speed = speed;
-        DidShoot = 0;
         NextEvolution = CreateParameters();
         CurrentHealthPoint = MaxHealthPoint;
     }
 
     void Update()
     {
-        Shoot();
+        Attack();
     }
 
-    private void Shoot()
+    private void Attack()
     {
         timer += Time.deltaTime;
-        if (!DoShoot)
-        {
-            if (Input.GetMouseButton(0) && timer > reload)
-            {
-                Instantiate(bullet, transform.position, transform.rotation);
-                DidShoot++;
-                if (countBullet > 1)
-                    DoShoot = !DoShoot;
-                timer = 0;
-            }
-        }
-        else
-        {
-            if (timer > reload / 4)
-            {
-                Instantiate(bullet, transform.position, transform.rotation);
-                if (DidShoot++ >= countBullet)
-                {
-                    DidShoot = 0;
-                    DoShoot = !DoShoot;
-                }
 
-                timer = 0;
-            }
-        }
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -74,10 +49,17 @@ public class PeasScript : MonoBehaviour
 
     public void NextChoice(int num)
     {
-        if (NextEvolution == null || num >= NextEvolution.Length);
+        if (NextEvolution == null || num >= NextEvolution.Length)
+        {
+            reload *= 0.9f;
+            damageBullet *= 2;
+            speedBullet *= 2;
+            speed *= 2;
+        }
         else
         {
             reload = NextEvolution[num].reload;
+            range = NextEvolution[num].range;
             if (NextEvolution[num].bullet != null)
                 bullet.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].bullet;
             damageBullet = NextEvolution[num].damageBullet;
@@ -96,13 +78,8 @@ public class PeasScript : MonoBehaviour
         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
     }
 
-    private ParametersPeas[] CreateParameters()
+    private ParametersChomper[] CreateParameters()
     {
-        return new[]
-        {
-            new ParametersPeas(0.1f, null, 1000, 100, 1000, 100.0f,
-                GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().SpritesPeas[0],
-                10, null)
-        };
+
     }
 }

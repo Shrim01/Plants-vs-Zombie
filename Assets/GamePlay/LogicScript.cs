@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Classes;
 
 public class LogicScript : MonoBehaviour
 {
@@ -7,7 +9,10 @@ public class LogicScript : MonoBehaviour
     public int scoreNextlevel = 20;
     public GameObject choice;
     public GameObject gameOver;
-    
+    public Sprite[] SpritesPeas;
+    public Sprite[] BulletPeas;
+    public Sprite[] SpritesChomper;
+    public Sprite[] BulletChomper;
 
     void Start()
     {
@@ -27,13 +32,6 @@ public class LogicScript : MonoBehaviour
     private void ShowChoice()
     {
         choice.SetActive(true);
-    }
-
-    public void DoChoice(int num)
-    {
-        if (num == 0)
-            if (num == 1)
-                choice.SetActive(false);
     }
 
     public void GameOver()
