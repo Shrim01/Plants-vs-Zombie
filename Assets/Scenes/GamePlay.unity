@@ -557,6 +557,7 @@ MonoBehaviour:
   damageBullet: 10
   speedBullet: 60
   countBullet: 0
+  speed: 30
 --- !u!114 &77825881
 MonoBehaviour:
   m_ObjectHideFlags: 0

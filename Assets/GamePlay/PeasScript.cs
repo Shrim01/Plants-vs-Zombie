@@ -92,7 +92,6 @@ public class PeasScript : MonoBehaviour
             if (NextEvolution[num].nextEvolution != null)
                 NextEvolution = NextEvolution[num].nextEvolution;
         }
-
         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
     }
 

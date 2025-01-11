@@ -49,13 +49,7 @@ public class ChomperScript : MonoBehaviour
 
     public void NextChoice(int num)
     {
-        if (NextEvolution == null || num >= NextEvolution.Length)
-        {
-            reload *= 0.9f;
-            damageBullet *= 2;
-            speedBullet *= 2;
-            speed *= 2;
-        }
+        if (NextEvolution == null || num >= NextEvolution.Length);
         else
         {
             reload = NextEvolution[num].reload;
@@ -74,12 +68,11 @@ public class ChomperScript : MonoBehaviour
             if (NextEvolution[num].nextEvolution != null)
                 NextEvolution = NextEvolution[num].nextEvolution;
         }
-
         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
     }
 
     private ParametersChomper[] CreateParameters()
     {
-
+        return null;
     }
 }
