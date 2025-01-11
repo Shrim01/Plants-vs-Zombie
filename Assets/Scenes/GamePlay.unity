@@ -556,6 +556,7 @@ MonoBehaviour:
   bullet: {fileID: 6779933801951442537, guid: 80d7af4c768b89b48bd82702d787c809, type: 3}
   damageBullet: 10
   speedBullet: 60
+  countBullet: 0
 --- !u!114 &77825881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1718,7 +1719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &510888369
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2295,7 +2296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 35a881f147862d246a0d405e8c9321fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f8caf6879c4488e4f98cf15dd2260048, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4603,9 +4604,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scorePlayer: 0
   scoreNextlevel: 20
-  choice: {fileID: 0}
+  choice: {fileID: 94424653}
   gameOver: {fileID: 0}
-  Sprites: []
+  SpritesPeas:
+  - {fileID: 21300000, guid: f8caf6879c4488e4f98cf15dd2260048, type: 3}
+  BulletPeas: []
+  SpritesChomper: []
+  BulletChomper: []
 --- !u!1 &1589837878
 GameObject:
   m_ObjectHideFlags: 0
@@ -4688,9 +4693,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LogicScript, Assembly-CSharp
-        m_MethodName: DoChoice
+      - m_Target: {fileID: 77825880}
+        m_TargetAssemblyTypeName: PeasScript, Assembly-CSharp
+        m_MethodName: NextChoice
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

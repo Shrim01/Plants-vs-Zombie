@@ -36,7 +36,7 @@ public class ZombieScripts : MonoBehaviour
             else
             {
                 Destroy(gameObject);
-                logic.AddScore(10);
+                logic.AddScore(100);
             }
         }
     }

@@ -1,18 +1,26 @@
 using UnityEngine;
+using Classes;
+using UnityEngine.U2D.IK;
 
 public class PeasScript : MonoBehaviour
 {
-
     public float reload;
     public GameObject bullet;
     public int damageBullet;
     public int speedBullet;
+    public int countBullet = 1;
+    private int speed;
     private float MaxHealthPoint = 100;
     private float CurrentHealthPoint;
     private float timer;
+    private bool DoShoot;
+    private int DidShoot;
+    public ParametersPeas[] NextEvolution;
 
     void Start()
     {
+        DidShoot = 0;
+        NextEvolution = CreateParameters();
         CurrentHealthPoint = MaxHealthPoint;
     }
 
@@ -24,10 +32,30 @@ public class PeasScript : MonoBehaviour
     private void Shoot()
     {
         timer += Time.deltaTime;
-        if (Input.GetMouseButton(0) && timer > reload)
+        if (!DoShoot)
         {
-            Instantiate(bullet, transform.position, transform.rotation);
-            timer = 0;
+            if (Input.GetMouseButton(0) && timer > reload)
+            {
+                Instantiate(bullet, transform.position, transform.rotation);
+                DidShoot++;
+                if (countBullet > 1)
+                    DoShoot = !DoShoot;
+                timer = 0;
+            }
+        }
+        else
+        {
+            if (timer > reload / 4)
+            {
+                Instantiate(bullet, transform.position, transform.rotation);
+                if (DidShoot++ >= countBullet)
+                {
+                    DidShoot = 0;
+                    DoShoot = !DoShoot;
+                }
+
+                timer = 0;
+            }
         }
     }
 
@@ -40,5 +68,45 @@ public class PeasScript : MonoBehaviour
             gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().GameOver();
         }
+    }
+
+    public void NextChoice(int num)
+    {
+        if (NextEvolution == null || num >= NextEvolution.Length)
+        {
+            reload *= 0.9f;
+            damageBullet *= 2;
+            speedBullet *= 2;
+            speed *= 2;
+        }
+        else
+        {
+            reload = NextEvolution[num].reload;
+            if (NextEvolution[num].bullet != null)
+                bullet.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].bullet;
+            damageBullet = NextEvolution[num].damageBullet;
+            speedBullet = NextEvolution[num].speedBullet;
+            countBullet = NextEvolution[num].countBullet;
+            speed = NextEvolution[num].speed;
+            MaxHealthPoint = NextEvolution[num].Health;
+            CurrentHealthPoint = NextEvolution[num].Health;
+            gameObject.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].evolution;
+            if (NextEvolution[num].bullet != null)
+                bullet.gameObject.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].bullet;
+            if (NextEvolution[num].nextEvolution != null)
+                NextEvolution = NextEvolution[num].nextEvolution;
+        }
+
+        GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
+    }
+
+    private ParametersPeas[] CreateParameters()
+    {
+        return new[]
+        {
+            new ParametersPeas(0.1f, null, 1000, 100, 1000, 100.0f,
+                GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().SpritesPeas[0],
+                10, null)
+        };
     }
 }
