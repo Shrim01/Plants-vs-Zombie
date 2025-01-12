@@ -8,6 +8,9 @@ TagManager:
   - Bullet
   - Logic
   - Choice
+  - Choisen
+  - ChoiceManager
+  - Canvas
   layers:
   - Default
   - TransparentFX

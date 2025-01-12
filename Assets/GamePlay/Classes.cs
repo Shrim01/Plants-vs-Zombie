@@ -63,4 +63,8 @@ namespace Classes
             nextEvolution = NextEvo;
         }
     }
+    public static class Choice
+    {
+        public static bool[] Chosen;
+    }
 }

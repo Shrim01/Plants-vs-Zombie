@@ -73,7 +73,7 @@ public class PeasScript : MonoBehaviour
 
     public void NextChoice(int num)
     {
-        if (NextEvolution == null || num >= NextEvolution.Length) ;
+        if (NextEvolution == null || num >= NextEvolution.Length);
         else
         {
             reload = NextEvolution[num].reload;
@@ -91,8 +91,10 @@ public class PeasScript : MonoBehaviour
             if (NextEvolution[num].nextEvolution != null)
                 NextEvolution = NextEvolution[num].nextEvolution;
         }
-
         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
+
+        foreach (var element in GameObject.FindGameObjectsWithTag("Choisen"))
+            Destroy(element);
     }
 
     private ParametersPeas[] CreateParameters()

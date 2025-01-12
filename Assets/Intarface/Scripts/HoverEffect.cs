@@ -5,23 +5,20 @@ using UnityEngine.EventSystems;
 
 public class HoverEffectUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public GameObject objectToShow; // Объект, который будет появляться
+    public GameObject objectToShow;
 
     private void Start()
     {
-        // Скрываем объект в начале
         objectToShow.SetActive(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // Показать объект при наведении курсора
         objectToShow.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // Скрыть объект, когда курсор уходит
         objectToShow.SetActive(false);
     }
 }
