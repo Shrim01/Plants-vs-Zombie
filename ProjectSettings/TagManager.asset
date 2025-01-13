@@ -11,6 +11,7 @@ TagManager:
   - Choisen
   - ChoiceManager
   - Canvas
+  - Button
   layers:
   - Default
   - TransparentFX

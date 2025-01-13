@@ -10,5 +10,9 @@ public class EvoScript : MonoBehaviour
         var choicen = GameObject.FindGameObjectWithTag("Choice").transform;
         gameObject.tag = "Choisen";
         transform.parent = choicen;
+        foreach (var button in GameObject.FindGameObjectsWithTag("Button"))
+        {
+            button.GetComponent<ButtonScript>().Change();
+        }
     }
 }

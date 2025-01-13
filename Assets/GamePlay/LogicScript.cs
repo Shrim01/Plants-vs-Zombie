@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Classes;
+using Unity.VisualScripting;
 
 public class LogicScript : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class LogicScript : MonoBehaviour
     public Sprite[] BulletChomper;
     public GameObject[] Peas;
     public GameObject[] HidePeas;
-    public static int currentIdChoice = 0;
+    public static int currentIdChoice;
+    public GameObject[] Buttons;
 
     void Start()
     {
@@ -36,29 +38,28 @@ public class LogicScript : MonoBehaviour
     private void ShowChoice()
     {
         choice.SetActive(true);
-
         if (currentIdChoice == 0)
         {
-            if (Choice.Chosen[currentIdChoice])
-                Instantiate(HidePeas[currentIdChoice], new Vector3(1620, 681, 0), new Quaternion(0, 0, 0, 0));
+            if (!Choice.Chosen[currentIdChoice])
+                Instantiate(HidePeas[currentIdChoice], new Vector3(1620-40, 681, 0), new Quaternion(0, 0, 0, 0));
             else
-                Instantiate(Peas[currentIdChoice], new Vector3(1620, 681, 0), new Quaternion(0, 0, 0, 0));
+                Instantiate(Peas[currentIdChoice], new Vector3(1620-40, 681, 0), new Quaternion(0, 0, 0, 0));
             currentIdChoice = 1;
         }
         else if (currentIdChoice == 1)
         {
-            if (Choice.Chosen[currentIdChoice])
-                Instantiate(HidePeas[currentIdChoice], new Vector3(1620, 681, 2), new Quaternion(0, 0, 0, 0));
+            if (!Choice.Chosen[currentIdChoice])
+                Instantiate(HidePeas[currentIdChoice], new Vector3(1620-40, 681, 2), new Quaternion(0, 0, 0, 0));
             else
-                Instantiate(Peas[currentIdChoice], new Vector3(1620, 681, 2), new Quaternion(0, 0, 0, 0));
-            if (Choice.Chosen[currentIdChoice + 1])
-                Instantiate(HidePeas[currentIdChoice + 1], new Vector3(1620, 270, 2), new Quaternion(0, 0, 0, 0));
+                Instantiate(Peas[currentIdChoice], new Vector3(1620-40, 681, 2), new Quaternion(0, 0, 0, 0));
+            if (!Choice.Chosen[currentIdChoice + 1])
+                Instantiate(HidePeas[currentIdChoice + 1], new Vector3(1620-40, 270, 2), new Quaternion(0, 0, 0, 0));
             else
-                Instantiate(Peas[currentIdChoice + 1], new Vector3(1620, 270, 2), new Quaternion(0, 0, 0, 0));
+                Instantiate(Peas[currentIdChoice + 1], new Vector3(1620-40, 270, 2), new Quaternion(0, 0, 0, 0));
         }
         else if (currentIdChoice == 2)
         {
-            if (Choice.Chosen[currentIdChoice + 1])
+            if (!Choice.Chosen[currentIdChoice + 1])
                 Instantiate(HidePeas[currentIdChoice + 1], new Vector3(1620, 681, 2), new Quaternion(0, 0, 0, 0));
             else
                 Instantiate(Peas[currentIdChoice + 1], new Vector3(1620, 681, 2), new Quaternion(0, 0, 0, 0));

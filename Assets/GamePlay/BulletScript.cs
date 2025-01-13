@@ -27,7 +27,7 @@ public class BulletScript : MonoBehaviour
         time += Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D (Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (!through && other.gameObject.tag!="Player")
             Destroy(gameObject);

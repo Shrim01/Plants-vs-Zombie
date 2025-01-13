@@ -55,6 +55,7 @@ public class PeasScript : MonoBehaviour
                     DidShoot = 0;
                     DoShoot = !DoShoot;
                 }
+
                 timer = 0;
             }
         }
@@ -73,28 +74,23 @@ public class PeasScript : MonoBehaviour
 
     public void NextChoice(int num)
     {
-        if (NextEvolution == null || num >= NextEvolution.Length);
-        else
-        {
-            reload = NextEvolution[num].reload;
-            if (NextEvolution[num].bullet != null)
-                bullet.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].bullet;
-            damageBullet = NextEvolution[num].damageBullet;
-            speedBullet = NextEvolution[num].speedBullet;
-            countBullet = NextEvolution[num].countBullet;
-            GameObject.FindGameObjectWithTag("Player").GetComponent<MovingScript>().speed = NextEvolution[num].speed;
-            MaxHealthPoint = NextEvolution[num].Health;
-            CurrentHealthPoint = NextEvolution[num].Health;
-            gameObject.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].evolution;
-            if (NextEvolution[num].bullet != null)
-                bullet.gameObject.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].bullet;
-            if (NextEvolution[num].nextEvolution != null)
-                NextEvolution = NextEvolution[num].nextEvolution;
-        }
-        GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
-
+        reload = NextEvolution[num].reload;
+        if (NextEvolution[num].bullet != null)
+            bullet.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].bullet;
+        damageBullet = NextEvolution[num].damageBullet;
+        speedBullet = NextEvolution[num].speedBullet;
+        countBullet = NextEvolution[num].countBullet;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<MovingScript>().speed = NextEvolution[num].speed;
+        MaxHealthPoint = NextEvolution[num].Health;
+        CurrentHealthPoint = NextEvolution[num].Health;
+        gameObject.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].evolution;
+        if (NextEvolution[num].bullet != null)
+            bullet.gameObject.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].bullet;
+        if (NextEvolution[num].nextEvolution != null)
+            NextEvolution = NextEvolution[num].nextEvolution;
         foreach (var element in GameObject.FindGameObjectsWithTag("Choisen"))
             Destroy(element);
+        GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
     }
 
     private ParametersPeas[] CreateParameters()
