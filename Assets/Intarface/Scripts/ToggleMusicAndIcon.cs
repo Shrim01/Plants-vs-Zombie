@@ -1,40 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ToggleMusicAndIcon : MonoBehaviour
 {
-    public GameObject checkmark; // Ссылка на объект галочки
-    public GameObject cross;      // Ссылка на объект крестика
-    public AudioSource audioSource; // Ссылка на AudioSource
+    public GameObject checkmark; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public GameObject cross;      // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public AudioSource audioSource; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ AudioSource
 
-    private bool isMusicPlaying = true; // Переменная для отслеживания состояния музыки
+    private bool isMusicPlaying = true; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
     void Start()
     {
-        // Убедитесь, что галочка активна, а крестик - нет
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅ
         checkmark.SetActive(true);
         cross.SetActive(false);
     }
 
     public void Toggle()
     {
-        // Переключаем состояние
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         isMusicPlaying = !isMusicPlaying;
 
-        // Меняем видимость объектов
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         checkmark.SetActive(isMusicPlaying);
         cross.SetActive(!isMusicPlaying);
 
-        // Останавливаем или возобновляем музыку
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if (isMusicPlaying)
         {
-            audioSource.Play(); // Воспроизводим музыку
+            audioSource.Play(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
         else
         {
-            audioSource.Stop(); // Останавливаем музыку
+            audioSource.Stop(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
     }
 }

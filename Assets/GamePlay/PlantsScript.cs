@@ -1,6 +1,3 @@
-using System.Runtime.InteropServices;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class PlantsScript : MonoBehaviour
