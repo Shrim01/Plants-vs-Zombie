@@ -25,14 +25,14 @@ public class ZombieScripts : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().sprite = sprites[2];
             CurrentHealthPoint = MaxHealthPoint * 2;
             addScore = 20;
-            gameObject.GetComponent<Collider2D>().offset=new Vector2(0,-0.7f);
+            gameObject.GetComponent<Collider2D>().offset = new Vector2(0, -0.7f);
         }
         else
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = sprites[1];
             CurrentHealthPoint = MaxHealthPoint / 10 * 15;
             addScore = 15;
-            gameObject.GetComponent<Collider2D>().offset=new Vector2(-0.4f,-1);
+            gameObject.GetComponent<Collider2D>().offset = new Vector2(-0.4f, -1);
         }
 
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
@@ -52,14 +52,25 @@ public class ZombieScripts : MonoBehaviour
         if (other.gameObject.tag == "Bullet")
         {
             var bullet = other.gameObject;
-            var damageBullet = bullet.GetComponent<BulletScript>().damage;
-            if (damageBullet < CurrentHealthPoint)
-                CurrentHealthPoint -= damageBullet;
-            else
-            {
-                Destroy(gameObject);
+            DoDamage(bullet.GetComponent<BulletScript>().damage,true);
+        }
+
+        if (other.gameObject.tag == "PlantBullet")
+        {
+            var bullet = other.gameObject;
+            DoDamage(bullet.GetComponent<PlantsBulletScript>().damage,false);
+        }
+    }
+
+    private void DoDamage(int damage, bool flag)
+    {
+        if (damage < CurrentHealthPoint)
+            CurrentHealthPoint -= damage;
+        else
+        {
+            Destroy(gameObject);
+            if (flag)
                 logic.AddScore(addScore);
-            }
         }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Classes;
-using TMPro; // Не забудьте добавить ссылку на TextMeshPro
+using TMPro;
 
 public class LogicScript : MonoBehaviour
 {
@@ -19,25 +19,24 @@ public class LogicScript : MonoBehaviour
     public static int currentIdChoice;
     public GameObject[] Buttons;
 
-    // UI элементы для шкалы опыта
-    public Image experienceBar; // Ссылка на Image, представляющий шкалу опыта
-    public TMP_Text TextBar; // Ссылка на TMP_Text, представляющий текстовый элемент с опытом
+    public Image experienceBar;
+    public TMP_Text TextBar;
 
     void Start()
     {
         Choice.Chosen = new[] { false, false, false, false };
         scorePlayer = 0;
-        UpdateExperienceBar(); // Инициализация шкалы опыта
+        UpdateExperienceBar();
     }
 
     public void AddScore(int score)
     {
         scorePlayer += score;
-        UpdateExperienceBar(); // Обновляем шкалу опыта
+        UpdateExperienceBar();
         if (scorePlayer >= scoreNextlevel)
         {
             ShowChoice();
-            scoreNextlevel *= 3; // Увеличиваем необходимый опыт для следующего уровня
+            scoreNextlevel *= 3;
         }
     }
 
@@ -46,12 +45,11 @@ public class LogicScript : MonoBehaviour
         if (experienceBar != null)
         {
             float experiencePercentage = (float)scorePlayer / scoreNextlevel;
-            experienceBar.fillAmount = experiencePercentage; // Обновляем заполнение шкалы
+            experienceBar.fillAmount = experiencePercentage;
 
-            // Обновляем текстовое поле
             if (TextBar != null)
             {
-                TextBar.text = $"{scorePlayer}/{scoreNextlevel}"; // Форматируем текст
+                TextBar.text = $"{scorePlayer}/{scoreNextlevel}";
             }
         }
     }

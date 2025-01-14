@@ -12,6 +12,8 @@ TagManager:
   - ChoiceManager
   - Canvas
   - Button
+  - Plant
+  - PlantBullet
   layers:
   - Default
   - TransparentFX

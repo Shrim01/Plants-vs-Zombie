@@ -1,6 +1,7 @@
 using UnityEngine;
 using Classes;
 using GamePlay;
+using Unity.Collections;
 
 public class PeasScript : MonoBehaviour
 {
@@ -18,10 +19,12 @@ public class PeasScript : MonoBehaviour
     private bool DoShoot;
     private int DidShoot;
     public ParametersPeas[] NextEvolution;
+    public ParametersPeas[] previousEvolution;
 
-    // Добавляем ссылки на SpriteRenderer для шкалы здоровья и урона
-    public SpriteRenderer healthBar; // Ссылка на SpriteRenderer для шкалы здоровья
-    public SpriteRenderer damageOverlay; // Ссылка на SpriteRenderer для отображения урона
+
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ SpriteRenderer пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
+    public SpriteRenderer healthBar; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ SpriteRenderer пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public SpriteRenderer damageOverlay; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ SpriteRenderer пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
     void Start()
     {
@@ -29,9 +32,8 @@ public class PeasScript : MonoBehaviour
         DidShoot = 0;
         NextEvolution = CreateParameters();
         CurrentHealthPoint = MaxHealthPoint;
-
-        // Инициализация шкалы здоровья
         UpdateHealthBar();
+        previousEvolution = null;
     }
 
     void Update()
@@ -63,7 +65,6 @@ public class PeasScript : MonoBehaviour
                     DidShoot = 0;
                     DoShoot = !DoShoot;
                 }
-
                 timer = 0;
             }
         }
@@ -72,10 +73,20 @@ public class PeasScript : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.tag == "Zombie")
-        {
-            // Уменьшаем здоровье
             CurrentHealthPoint -= other.gameObject.GetComponent<ZombieScripts>().damage * Time.deltaTime;
-            UpdateHealthBar(); // Обновляем шкалу здоровья
+
+        if (other.gameObject.tag == "PlantBullet")
+        {
+            var damage = other.gameObject.GetComponent<PlantsBulletScript>().damage;
+            if (damage < CurrentHealthPoint)
+                CurrentHealthPoint -= damage;
+        }
+
+        if (CurrentHealthPoint <= 0)
+        {
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            CurrentHealthPoint -= other.gameObject.GetComponent<ZombieScripts>().damage * Time.deltaTime;
+            UpdateHealthBar(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
             if (CurrentHealthPoint <= 0)
             {
@@ -87,17 +98,17 @@ public class PeasScript : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        // Обновляем ширину шкалы здоровья в зависимости от текущего уровня здоровья
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         float healthPercentage = CurrentHealthPoint / MaxHealthPoint;
 
-        // Устанавливаем ширину HealthBar
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ HealthBar
         healthBar.transform.localScale = new Vector3(healthPercentage, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
 
-        // Устанавливаем ширину DamageOverlay
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ DamageOverlay
         damageOverlay.transform.localScale = new Vector3(1 - healthPercentage, damageOverlay.transform.localScale.y, damageOverlay.transform.localScale.z);
 
-        // Устанавливаем цвет DamageOverlay на красный, если здоровье меньше максимального
-        damageOverlay.color = (CurrentHealthPoint < MaxHealthPoint) ? Color.red : new Color(1, 0, 0, 0); // Прозрачный, если нет урона
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ DamageOverlay пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        damageOverlay.color = (CurrentHealthPoint < MaxHealthPoint) ? Color.red : new Color(1, 0, 0, 0); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     }
 
     public void NextChoice(int num)
@@ -115,7 +126,11 @@ public class PeasScript : MonoBehaviour
         if (NextEvolution[num].bullet != null)
             bullet.gameObject.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].bullet;
         if (NextEvolution[num].nextEvolution != null)
+        {
+            previousEvolution = NextEvolution;
             NextEvolution = NextEvolution[num].nextEvolution;
+        }
+
         foreach (var element in GameObject.FindGameObjectsWithTag("Choisen"))
             Destroy(element);
         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
@@ -142,7 +157,7 @@ public class PeasScript : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().BulletPeas[1],
                         60, 80, 45, 250.0f, true,
                         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().SpritesPeas[2],
-                        1, new[] { fin })
+                        2, new[] { fin })
                 })
         };
     }
