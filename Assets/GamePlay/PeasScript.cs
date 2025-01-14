@@ -11,12 +11,17 @@ public class PeasScript : MonoBehaviour
     public int countBullet = 1;
     public int speed;
     public bool boom;
-    private float MaxHealthPoint = 200;
+
+    private float MaxHealthPoint = 20;
     private float CurrentHealthPoint;
     private float timer;
     private bool DoShoot;
     private int DidShoot;
     public ParametersPeas[] NextEvolution;
+
+    // Добавляем ссылки на SpriteRenderer для шкалы здоровья и урона
+    public SpriteRenderer healthBar; // Ссылка на SpriteRenderer для шкалы здоровья
+    public SpriteRenderer damageOverlay; // Ссылка на SpriteRenderer для отображения урона
 
     void Start()
     {
@@ -24,6 +29,9 @@ public class PeasScript : MonoBehaviour
         DidShoot = 0;
         NextEvolution = CreateParameters();
         CurrentHealthPoint = MaxHealthPoint;
+
+        // Инициализация шкалы здоровья
+        UpdateHealthBar();
     }
 
     void Update()
@@ -64,12 +72,32 @@ public class PeasScript : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.tag == "Zombie")
-            CurrentHealthPoint -= other.gameObject.GetComponent<ZombieScripts>().damage * Time.deltaTime;
-        if (CurrentHealthPoint <= 0)
         {
-            gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().GameOver();
+            // Уменьшаем здоровье
+            CurrentHealthPoint -= other.gameObject.GetComponent<ZombieScripts>().damage * Time.deltaTime;
+            UpdateHealthBar(); // Обновляем шкалу здоровья
+
+            if (CurrentHealthPoint <= 0)
+            {
+                gameObject.SetActive(false);
+                GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().GameOver();
+            }
         }
+    }
+
+    private void UpdateHealthBar()
+    {
+        // Обновляем ширину шкалы здоровья в зависимости от текущего уровня здоровья
+        float healthPercentage = CurrentHealthPoint / MaxHealthPoint;
+
+        // Устанавливаем ширину HealthBar
+        healthBar.transform.localScale = new Vector3(healthPercentage, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+
+        // Устанавливаем ширину DamageOverlay
+        damageOverlay.transform.localScale = new Vector3(1 - healthPercentage, damageOverlay.transform.localScale.y, damageOverlay.transform.localScale.z);
+
+        // Устанавливаем цвет DamageOverlay на красный, если здоровье меньше максимального
+        damageOverlay.color = (CurrentHealthPoint < MaxHealthPoint) ? Color.red : new Color(1, 0, 0, 0); // Прозрачный, если нет урона
     }
 
     public void NextChoice(int num)
@@ -91,6 +119,7 @@ public class PeasScript : MonoBehaviour
         foreach (var element in GameObject.FindGameObjectsWithTag("Choisen"))
             Destroy(element);
         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
+        GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().UpdateExperienceBar();
     }
 
     private ParametersPeas[] CreateParameters()
