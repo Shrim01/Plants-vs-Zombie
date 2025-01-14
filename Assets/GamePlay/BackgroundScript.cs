@@ -6,7 +6,7 @@ public class BackgroundScript : MonoBehaviour
     private float positionX = 11.52f;
     private float positionY = 11.52f;
     private Vector2[,] position;
-    private const float fault = 0.4f;
+    private const float fault = 0.8f;
 
     void Start()
     {

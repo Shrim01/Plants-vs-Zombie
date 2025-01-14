@@ -1,8 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Classes;
-using Unity.VisualScripting;
 
 public class LogicScript : MonoBehaviour
 {

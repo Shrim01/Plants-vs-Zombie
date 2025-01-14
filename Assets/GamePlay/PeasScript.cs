@@ -1,6 +1,7 @@
 using UnityEngine;
 using Classes;
 using GamePlay;
+using Unity.Collections;
 
 public class PeasScript : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PeasScript : MonoBehaviour
     private bool DoShoot;
     private int DidShoot;
     public ParametersPeas[] NextEvolution;
+    public ParametersPeas[] previousEvolution;
+
 
     void Start()
     {
@@ -24,6 +27,7 @@ public class PeasScript : MonoBehaviour
         DidShoot = 0;
         NextEvolution = CreateParameters();
         CurrentHealthPoint = MaxHealthPoint;
+        previousEvolution = null;
     }
 
     void Update()
@@ -55,7 +59,6 @@ public class PeasScript : MonoBehaviour
                     DidShoot = 0;
                     DoShoot = !DoShoot;
                 }
-
                 timer = 0;
             }
         }
@@ -65,6 +68,14 @@ public class PeasScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Zombie")
             CurrentHealthPoint -= other.gameObject.GetComponent<ZombieScripts>().damage * Time.deltaTime;
+
+        if (other.gameObject.tag == "PlantBullet")
+        {
+            var damage = other.gameObject.GetComponent<PlantsBulletScript>().damage;
+            if (damage < CurrentHealthPoint)
+                CurrentHealthPoint -= damage;
+        }
+
         if (CurrentHealthPoint <= 0)
         {
             gameObject.SetActive(false);
@@ -87,7 +98,11 @@ public class PeasScript : MonoBehaviour
         if (NextEvolution[num].bullet != null)
             bullet.gameObject.GetComponent<SpriteRenderer>().sprite = NextEvolution[num].bullet;
         if (NextEvolution[num].nextEvolution != null)
+        {
+            previousEvolution = NextEvolution;
             NextEvolution = NextEvolution[num].nextEvolution;
+        }
+
         foreach (var element in GameObject.FindGameObjectsWithTag("Choisen"))
             Destroy(element);
         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
@@ -113,7 +128,7 @@ public class PeasScript : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().BulletPeas[1],
                         60, 80, 45, 250.0f, true,
                         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().SpritesPeas[2],
-                        1, new[] { fin })
+                        2, new[] { fin })
                 })
         };
     }
