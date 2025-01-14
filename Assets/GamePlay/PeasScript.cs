@@ -12,7 +12,8 @@ public class PeasScript : MonoBehaviour
     public int countBullet = 1;
     public int speed;
     public bool boom;
-    private float MaxHealthPoint = 200;
+
+    private float MaxHealthPoint = 20;
     private float CurrentHealthPoint;
     private float timer;
     private bool DoShoot;
@@ -21,12 +22,17 @@ public class PeasScript : MonoBehaviour
     public ParametersPeas[] previousEvolution;
 
 
+    // ��������� ������ �� SpriteRenderer ��� ����� �������� � �����
+    public SpriteRenderer healthBar; // ������ �� SpriteRenderer ��� ����� ��������
+    public SpriteRenderer damageOverlay; // ������ �� SpriteRenderer ��� ����������� �����
+
     void Start()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<MovingScript>().speed = speed;
         DidShoot = 0;
         NextEvolution = CreateParameters();
         CurrentHealthPoint = MaxHealthPoint;
+        UpdateHealthBar();
         previousEvolution = null;
     }
 
@@ -78,9 +84,31 @@ public class PeasScript : MonoBehaviour
 
         if (CurrentHealthPoint <= 0)
         {
-            gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().GameOver();
+            // ��������� ��������
+            CurrentHealthPoint -= other.gameObject.GetComponent<ZombieScripts>().damage * Time.deltaTime;
+            UpdateHealthBar(); // ��������� ����� ��������
+
+            if (CurrentHealthPoint <= 0)
+            {
+                gameObject.SetActive(false);
+                GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().GameOver();
+            }
         }
+    }
+
+    private void UpdateHealthBar()
+    {
+        // ��������� ������ ����� �������� � ����������� �� �������� ������ ��������
+        float healthPercentage = CurrentHealthPoint / MaxHealthPoint;
+
+        // ������������� ������ HealthBar
+        healthBar.transform.localScale = new Vector3(healthPercentage, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+
+        // ������������� ������ DamageOverlay
+        damageOverlay.transform.localScale = new Vector3(1 - healthPercentage, damageOverlay.transform.localScale.y, damageOverlay.transform.localScale.z);
+
+        // ������������� ���� DamageOverlay �� �������, ���� �������� ������ �������������
+        damageOverlay.color = (CurrentHealthPoint < MaxHealthPoint) ? Color.red : new Color(1, 0, 0, 0); // ����������, ���� ��� �����
     }
 
     public void NextChoice(int num)
@@ -106,6 +134,7 @@ public class PeasScript : MonoBehaviour
         foreach (var element in GameObject.FindGameObjectsWithTag("Choisen"))
             Destroy(element);
         GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().choice.SetActive(false);
+        GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>().UpdateExperienceBar();
     }
 
     private ParametersPeas[] CreateParameters()
